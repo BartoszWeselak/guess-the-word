@@ -7,19 +7,24 @@ words = [
 class game:
 
     def __init__(self,word):
-        self.word=word
+        self.word=word.upper()
         self.word=[x for x in self.word]
         self.guessed_words=[]
     def check_letter(self,char,player):
-        if char in self.word:
-            self.guessed_words.append(char)
-            return "right anwser"
-        elif player.get_life()>0:
-            self.life_loss(player)
-            return "wrong anwser"
+        print(f"debug {char}")
+        char = char.upper()
+        if char in self.guessed_words:
+            print("word already guessed")
         else:
-            print("game over")
-            return "wrong anwser"
+            if char in self.word:
+                self.guessed_words.append(char)
+                return "right anwser"
+            elif player.get_life()>0:
+                self.life_loss(player)
+                return "wrong anwser"
+            else:
+                print("game over")
+                return "wrong anwser"
 
     def __str__(self):
         return self.word
