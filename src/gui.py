@@ -15,20 +15,33 @@ def main_window(word,play):
 def game_window(root,word,play):
     label = tk.Label(root, text="Guess the word", font=("Helvetica", 16), bg='lightblue')
     label.pack()
-    word_label = tk.Label(root, text="_ _ _ _", font=("Helvetica", 24), bg='lightblue')
+    text=display_word(word)
+    word_label = tk.Label(root, text=text, font=("Helvetica", 24), bg='lightblue')
     word_label.pack(pady=20)
 
     keyboard_frame = tk.Frame(root, bg='lightblue')
     keyboard_frame.pack(pady=20)
 
-    create_keyboard(keyboard_frame,word,play)
+    create_keyboard(keyboard_frame,word,play,word_label)
 
-def create_keyboard(frame,word,play):
+
+def display_word(word):
+    text = ""
+    for w in word.__str__():
+        if w in word.show_anwsered():
+            text += " "+w+" "
+        else:
+            text += " _ "
+    return text
+def create_keyboard(frame,word,play,word_label):
     letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i, letter in enumerate(letters):
-        button = tk.Button(frame, text=letter, command=lambda l=letter: submit_letter(l,word,play), width=4, height=2, font=("Helvetica", 14))
+        button = tk.Button(frame, text=letter, command=lambda l=letter: submit_letter(l,word,play,word_label), width=4, height=2, font=("Helvetica", 14))
         button.grid(row=i//7, column=i%7, padx=5, pady=5)
 
 
-def submit_letter(letter,word,play):
+def submit_letter(letter,word,play,word_label):
     word.check_letter(letter,play)
+    text=display_word(word)
+    word_label.config(text=text)
+

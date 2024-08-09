@@ -16,3 +16,4 @@ class player:
 
     def set_score(self,score):
         self.score=score
+
