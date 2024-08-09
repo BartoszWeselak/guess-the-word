@@ -1,5 +1,5 @@
 import tkinter as tk
-import word_generator as word
+import game as word
 import player as play
 
 def main_window(word,play):

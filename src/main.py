@@ -1,4 +1,4 @@
-import word_generator as word
+import game as word
 import player as play
 import gui
 
