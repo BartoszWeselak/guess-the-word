@@ -1,4 +1,4 @@
-import game as word
+import game
 import player as play
 import gui
 
@@ -7,7 +7,7 @@ words = [
 ]
 
 if __name__ == "__main__":
-    game = word.game(words[0])
+    game = game.game(words[0])
     new_player=play.player("Arek")
     gui.main_window(game,new_player)
 

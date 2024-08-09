@@ -1,59 +1,85 @@
 import tkinter as tk
-import game as word
+import game
 import player as play
 
-def main_window(word,play):
+def main_window(game,play):
     root = tk.Tk()
     root.title("Guess")
     root.geometry("600x500")
     root.configure(bg='lightblue')
-    game_window(root,word,play)
+
+    game_window(root,game,play)
 
     root.mainloop()
 
 
-def game_window(root,word,play):
+def game_window(root,game,play):
+    spacer(root,1)
+
     label = tk.Label(root, text="Guess the word", font=("Helvetica", 16), bg='lightblue')
     label.pack()
-    text=display_word(word)
+    stats = display_stats(root, game, play)
+    stats_label = tk.Label(root, text=stats, font=("Helvetica", 16), bg='lightblue')
+    stats_label.pack()
+    text=display_word(game)
     word_label = tk.Label(root, text=text, font=("Helvetica", 24), bg='lightblue')
     word_label.pack(pady=20)
 
     keyboard_frame = tk.Frame(root, bg='lightblue')
     keyboard_frame.pack(pady=20)
 
-    create_keyboard(root,keyboard_frame,word,play,word_label)
+    create_keyboard(root,keyboard_frame,game,play,word_label,stats_label)
 
 
-def display_word(word):
+def display_word(game):
     text = ""
-    for w in word.__str__():
-        if w in word.show_anwsered():
+    for w in game.__str__():
+        if w in game.show_anwsered():
             text += " "+w+" "
         else:
             text += " _ "
     return text
-def create_keyboard(root,frame,word,play,word_label):
+def create_keyboard(root,frame,game,play,word_label,stats_label):
     letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i, letter in enumerate(letters):
-        button = tk.Button(frame, text=letter, command=lambda l=letter: submit_letter(root,l,word,play,word_label), width=4, height=2, font=("Helvetica", 14))
+        button = tk.Button(frame, text=letter, command=lambda l=letter: submit_letter(root,l,game,play,word_label,stats_label), width=4, height=2, font=("Helvetica", 14))
         button.grid(row=i//7, column=i%7, padx=5, pady=5)
 
 
-def submit_letter(root,letter,word,play,word_label):
-    word.check_letter(letter,play)
+def submit_letter(root,letter,game,play,word_label,stats_label):
+    game.check_letter(letter,play)
+
     if play.get_life() ==0:
-        game_over(root,word)
+        game_over(root,game)
     else:
-        text=display_word(word)
+        stats=display_stats(root,game,play)
+        stats_label.config(text=stats)
+        text=display_word(game)
         word_label.config(text=text)
 
 
-def game_over(root,word):
+def game_over(root,game):
     for widget in root.winfo_children():
         widget.destroy()
-    score = word.get_score()
+    score = game.get_score()
+    spacer(root,6)
     label = tk.Label(root, text="Game Over", font=("Helvetica", 16), bg='lightblue')
     label.pack()
     label_score = tk.Label(root, text=f"Your score is {score}", font=("Helvetica", 16), bg='lightblue')
     label_score.pack()
+
+
+def spacer(root,n=1):
+    for i in range(n):
+        space = tk.Label(root, text="", font=("Helvetica", 8), bg='lightblue')
+        space.pack()
+
+def display_stats(root,game,play):
+    hearth_icon = "\u2764"
+    hearts=""
+    score=game.get_score()
+    for i in range(play.get_life()):
+        hearts+=hearth_icon
+    stats=f"Life: {hearts} Score: {score}"
+
+    return stats
