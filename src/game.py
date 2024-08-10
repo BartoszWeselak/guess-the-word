@@ -9,7 +9,7 @@ class game:
         self.word=[x for x in self.word]
         self.guessed_words=[]
         self.score=0
-        print(self.anwser)
+
     def check_letter(self,char,player):
         print(f"debug {char}")
         char = char.upper()
@@ -57,3 +57,20 @@ class game:
         self.word = word.upper()
         self.word = [x for x in self.word]
         self.guessed_words = []
+        print(self.anwser)
+
+    def get_guessed_words(self):
+        return self.guessed_words
+
+    def get_word_size(self):
+        return len(self.word)
+
+    def get_guessed_words_size(self):
+        return len(self.guessed_words)
+
+    def compare_sizes(self):
+        word_size = self.get_word_size()
+        guessed_size = self.get_guessed_words_size()+1
+        print(word_size)
+        print(guessed_size)
+        return word_size==guessed_size

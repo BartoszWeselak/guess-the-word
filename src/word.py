@@ -29,6 +29,5 @@ def pick_word():
 
     random_index = random.randint(0, len(words) - 1)
 
-    print(random_index)
 
     return words[random_index]
