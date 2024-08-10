@@ -1,8 +1,5 @@
 import player as play
-
-words = [
-    "testtest","test"
-]
+import word
 
 class game:
 
@@ -50,3 +47,9 @@ class game:
 
     def get_word(self):
         return self.word
+
+    def restart_guessed_words(self):
+        self.guessed_words=[]
+
+    def set_new_word(self):
+        self.word=word.pick_word()

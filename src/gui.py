@@ -1,8 +1,12 @@
 import tkinter as tk
 import game
 import player as play
+import word
+import random
 
 def main_window(game,play):
+    game = game.game(word.pick_word())
+
     root = tk.Tk()
     root.title("Guess")
     root.geometry("600x500")
@@ -19,8 +23,11 @@ def restart_button(root,game,play):
 
 
 def start_game(root,game,play,start_button):
+    game.restart_guessed_words()
+
     for widget in root.winfo_children():
         widget.destroy()
+
     game_window(root,game,play)
 
 def game_window(root,game,play):
