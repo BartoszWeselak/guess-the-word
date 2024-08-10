@@ -18,4 +18,5 @@ class player:
     def set_score(self,score):
         self.score=score
 
-
+    def set_life(self,life):
+        self.life=life

@@ -7,11 +7,21 @@ def main_window(game,play):
     root.title("Guess")
     root.geometry("600x500")
     root.configure(bg='lightblue')
-
-    game_window(root,game,play)
+    restart_button(root,game,play)
 
     root.mainloop()
 
+def restart_button(root,game,play):
+
+    start_button = tk.Button(root, width=20, padx=2, pady=2, font=('Helvetica', 12), bg='lightgreen', fg='white',
+                             text="Start new game", command=lambda: start_game(root, game, play,start_button))
+    start_button.pack()
+
+
+def start_game(root,game,play,start_button):
+    for widget in root.winfo_children():
+        widget.destroy()
+    game_window(root,game,play)
 
 def game_window(root,game,play):
     spacer(root,1)
@@ -50,23 +60,30 @@ def submit_letter(root,letter,game,play,word_label,stats_label):
     game.check_letter(letter,play)
 
     if play.get_life() ==0:
-        game_over(root,game)
+        game_over(root,game,play)
     else:
         stats=display_stats(root,game,play)
         stats_label.config(text=stats)
         text=display_word(game)
         word_label.config(text=text)
+        if game.get_word() == game.show_anwsered():
+            print(game.get_word())
 
-
-def game_over(root,game):
+def game_over(root,game,play):
     for widget in root.winfo_children():
         widget.destroy()
     score = game.get_score()
+    play.set_life(3)
     spacer(root,6)
+
     label = tk.Label(root, text="Game Over", font=("Helvetica", 16), bg='lightblue')
     label.pack()
+    correct_label = tk.Label(root, text=f"correct word is {game.get_anwser()}", font=("Helvetica", 16), bg='lightblue')
+    correct_label.pack()
     label_score = tk.Label(root, text=f"Your score is {score}", font=("Helvetica", 16), bg='lightblue')
     label_score.pack()
+    game.set_score(0)
+    restart_button(root, game, play)
 
 
 def spacer(root,n=1):

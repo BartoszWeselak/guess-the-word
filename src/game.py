@@ -7,6 +7,7 @@ words = [
 class game:
 
     def __init__(self,word):
+        self.anwser=word
         self.word=word.upper()
         self.word=[x for x in self.word]
         self.guessed_words=[]
@@ -43,3 +44,9 @@ class game:
 
     def set_score(self,score):
         self.score=score
+
+    def get_anwser(self):
+        return self.anwser
+
+    def get_word(self):
+        return self.word
