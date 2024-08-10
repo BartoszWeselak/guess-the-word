@@ -11,10 +11,9 @@ class game:
         self.score=0
 
     def check_letter(self,char,player):
-        print(f"debug {char}")
         char = char.upper()
         if char in self.guessed_words:
-            print("word already guessed")
+            print()
         else:
             if char in self.word:
                 self.guessed_words.append(char)
@@ -24,8 +23,6 @@ class game:
                 self.life_loss(player)
                 return "wrong anwser"
             else:
-                print("game over")
-                print(f"your score is {self.score}")
                 return "wrong anwser"
 
     def __str__(self):
@@ -57,7 +54,6 @@ class game:
         self.word = word.upper()
         self.word = [x for x in self.word]
         self.guessed_words = []
-        print(self.anwser)
 
     def get_guessed_words(self):
         return self.guessed_words
@@ -71,6 +67,4 @@ class game:
     def compare_sizes(self):
         word_size = self.get_word_size()
         guessed_size = self.get_guessed_words_size()+1
-        print(word_size)
-        print(guessed_size)
         return word_size==guessed_size

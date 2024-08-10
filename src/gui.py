@@ -76,8 +76,6 @@ def submit_letter(root,letter,game,play,word_label,stats_label):
         stats_label.config(text=stats)
         text=display_word(game)
         word_label.config(text=text)
-        if game.get_word() == game.show_anwsered():
-            print(game.get_word())
 
 def game_over(root,game,play):
     for widget in root.winfo_children():

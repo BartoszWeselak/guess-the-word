@@ -10,7 +10,6 @@ class player:
     def wrong_anwser(self,life_loss):
         self.life-=life_loss
     def get_life(self):
-        print(f"test life {self.life}")
         return self.life
     def get_score(self):
         return self.score
