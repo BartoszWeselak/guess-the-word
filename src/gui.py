@@ -23,7 +23,7 @@ def restart_button(root,game,play):
 
 
 def start_game(root,game,play,start_button):
-    game.restart_guessed_words()
+    game.set_new_word(word.pick_word())
 
     for widget in root.winfo_children():
         widget.destroy()

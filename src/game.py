@@ -1,5 +1,5 @@
 import player as play
-import word
+import word as wrd
 
 class game:
 
@@ -9,6 +9,7 @@ class game:
         self.word=[x for x in self.word]
         self.guessed_words=[]
         self.score=0
+        print(self.anwser)
     def check_letter(self,char,player):
         print(f"debug {char}")
         char = char.upper()
@@ -49,7 +50,10 @@ class game:
         return self.word
 
     def restart_guessed_words(self):
-        self.guessed_words=[]
+        self.guessed_words = []
 
-    def set_new_word(self):
-        self.word=word.pick_word()
+    def set_new_word(self,word):
+        self.anwser = word
+        self.word = word.upper()
+        self.word = [x for x in self.word]
+        self.guessed_words = []

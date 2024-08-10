@@ -27,5 +27,8 @@ def pick_word():
         "spaceship"
     ]
 
-    print(random.randint(0, len(words)-1))
-    return words[random.randint(0, len(words)-1)]
+    random_index = random.randint(0, len(words) - 1)
+
+    print(random_index)
+
+    return words[random_index]
