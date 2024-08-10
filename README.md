@@ -2,9 +2,9 @@
 sample game
 
 ## Features
- -simple gui
- -player score
- -basic gameplay functions
+ -simple gui  
+ -player score  
+ -basic gameplay functions  
 
 ## How to use
 go to guess-the-word directory  
